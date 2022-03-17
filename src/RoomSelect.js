@@ -1,12 +1,12 @@
 import RoomCreate from "./RoomCreate";
 
-function RoomSelect(params) {
+function RoomSelect({user}) {
     // fetch to get room names
 
     return (
         <div>
-            <h3>Select a Room</h3>
-            { /* map the array to create list items */ }
+            <h3>Select a Room, {user.username}</h3>
+ 
             <RoomCreate />
 
 

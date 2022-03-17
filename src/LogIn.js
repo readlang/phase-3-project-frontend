@@ -1,22 +1,35 @@
-import React, {useState} from "react";
 
-function LogIn(params) {
-    // useState goes here
+function LogIn({ user, setUser }) {
+    function signIn() {
+        fetch(`http://localhost:9292/login/${user.username}/${user.password}`)
+        .then(r => r.json())
+        .then(d => setUser({...user, id: d.id, message: d.message}) )
+    }
+
+    function signUp() {
+        fetch("http://localhost:9292/signup", {
+            method: "POST",
+            headers: {"content-type": "application/json" },
+            body: JSON.stringify({username: user.username, password: user.password})
+        })
+        .then(r => r.json())
+        .then(d => setUser({...user, id: d.id, message: d.message}))
+    }
 
     return (
         <div>
             <h3>Log In</h3>
             <form>
-                <label>Username </label>
-                <input type="text" name="username"></input>
+                <input type="text" name="username" placeholder="Username" 
+                    value={user.username} onChange={(e) => setUser({...user, username:e.target.value })} />
                 <br/>
-                <label>Password </label>
-                <input type="text" name="password"></input>
+                <input type="text" name="password" placeholder="Password" 
+                    value={user.password} onChange={(e) => setUser({...user, password:e.target.value })} />
             </form>
             <br/>
-            <button>Sign In</button>
+            <button onClick={signIn} >Existing User Sign In</button>
             <br/> 
-            <button>New User Sign Up</button>
+            <button onClick={signUp} >New User Sign Up</button>
         </div>
     );
 }
