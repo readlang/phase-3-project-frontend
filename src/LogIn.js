@@ -21,10 +21,12 @@ function LogIn({ user, setUser }) {
             <h3>Log In</h3>
             <form>
                 <input type="text" name="username" placeholder="Username" 
-                    value={user.username} onChange={(e) => setUser({...user, username:e.target.value })} />
+                    value={user.username} 
+                    onChange={(e) => setUser({...user, username:e.target.value })} />
                 <br/>
                 <input type="text" name="password" placeholder="Password" 
-                    value={user.password} onChange={(e) => setUser({...user, password:e.target.value })} />
+                    value={user.password} 
+                    onChange={(e) => setUser({...user, password:e.target.value })} />
             </form>
             <br/>
             <button onClick={signIn} >Existing User Sign In</button>

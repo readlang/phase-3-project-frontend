@@ -1,19 +1,32 @@
+import React, {useState} from "react";
 
+function RoomCreate({addRoom}) {
+    const [roomName, setRoomName] = useState("")
+    const [roomDetail, setRoomDetail] = useState("")
 
-function RoomCreate() {
+    function handleSubmit (event) {
+        event.preventDefault();
+        console.log(`${roomName} ${roomDetail}`)
+        fetch("http://localhost:9292/create_room", {
+            method: "POST",
+            headers: {"content-type": "application/json"},
+            body: JSON.stringify({room_name: roomName, room_detail: roomDetail})
+        })
+        .then(r => r.json())
+        .then(newRoom => addRoom(newRoom))
+    }
 
     return (
         <div>
             <h4>Create Room</h4>
-            <form>
-                <label>Name </label>
-                <input type="text" name="Name"></input>
+            <form onSubmit={handleSubmit} >
+                <input type="text" name="Name" placeholder="Name"
+                value={roomName} onChange={e => setRoomName(e.target.value)} />
                 <br/>
-                <label>Details </label>
-                <input type="text" name="Details"></input>
+                <input type="text" name="Details" placeholder="Details"
+                value={roomDetail} onChange={e => setRoomDetail(e.target.value)} />
                 <br/>
-                <input type="submit"></input>
-
+                <input type="submit" value= "Create Room"/>
             </form>
         </div>
     );

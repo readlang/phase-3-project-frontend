@@ -1,13 +1,28 @@
+import React, {useEffect, useState} from 'react'
 import RoomCreate from "./RoomCreate";
+import RoomListItem from './RoomListItem';
 
-function RoomSelect({user}) {
-    // fetch to get room names
+function RoomSelect({user, setLocation, roomListData, setRoomListData}) {
+
+
+    // function to add a room to roomListData
+    function addRoom(newRoom) {
+        if (newRoom.message) {
+            
+            alert("Room already exists.  Please use a unique name.")
+        } else {
+            setRoomListData([...roomListData, newRoom])
+        }
+        
+    }
 
     return (
         <div>
             <h3>Select a Room, {user.username}</h3>
+            Room list here
+            { roomListData.map(room => <RoomListItem key={room.id} roomItem={room} setLocation={setLocation}/> ) }
  
-            <RoomCreate />
+            <RoomCreate addRoom={addRoom} />
 
 
         </div>
