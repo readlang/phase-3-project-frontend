@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from "react"
-
+import { Switch, Route } from "react-router-dom";
+// uses react-router-dom@5 (version 5) to use switch
+import NavBar from "./NavBar";
 import LogIn from './LogIn';
 import RoomSelect from './RoomSelect';
 import MessageRoom from './MessageRoom';
@@ -29,13 +31,24 @@ function App() {
   return (
 
     <div className="App">
-      <h1>Challenge Room</h1>
-      { user.message !== "Authorized" ? <LogIn user={user} setUser={setUser} /> : null }
-      { user.message === "Authorized" && user.location === 0 ? <RoomSelect user={user} 
-        setLocation={setLocation} roomListData={roomListData} setRoomListData={setRoomListData}/> : null }
-      { user.message === "Authorized" && user.location !== 0 ? <MessageRoom user={user} 
-        room={ roomListData.find(eachRoom => eachRoom.id === user.location) } /> : null }
+      <header><NavBar /> </header>
       
+
+      <Switch>
+        <Route exact path="/">  
+          { user.message !== "Authorized" ? 
+            <LogIn user={user} setUser={setUser} /> : 
+            <RoomSelect user={user} setLocation={setLocation} roomListData={roomListData} setRoomListData={setRoomListData}/> 
+          }
+        </Route>
+
+        <Route path="/room">
+          { user.message === "Authorized" && user.location !== 0 ? <MessageRoom user={user} 
+            room={ roomListData.find(eachRoom => eachRoom.id === user.location) } /> : null 
+          }
+        </Route>
+        
+      </Switch>
     </div>
   );
 }
