@@ -3,7 +3,7 @@ import RoomCreate from "./RoomCreate";
 import RoomListItem from './RoomListItem';
 
 function RoomSelect({user, setLocation, roomListData, setRoomListData}) {
-
+    // not sure if user is needed in this component
 
     // function to add a room to roomListData
     function addRoom(newRoom) {

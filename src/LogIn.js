@@ -1,7 +1,12 @@
 
 function LogIn({ user, setUser }) {
+    
     function signIn() {
-        fetch(`http://localhost:9292/login/${user.username}/${user.password}`)
+        fetch("http://localhost:9292/login", {
+            method: 'POST',
+            headers: { 'content-type': 'application/json'},
+            body: JSON.stringify({username: user.username, password: user.password})
+        })
         .then(r => r.json())
         .then(d => setUser({...user, id: d.id, message: d.message}) )
     }
@@ -24,11 +29,13 @@ function LogIn({ user, setUser }) {
                     value={user.username} 
                     onChange={(e) => setUser({...user, username:e.target.value })} />
                 <br/>
-                <input type="text" name="password" placeholder="Password" 
+                <input type="password" name="password" placeholder="Password" 
                     value={user.password} 
                     onChange={(e) => setUser({...user, password:e.target.value })} />
             </form>
-            <br/>
+            
+            {user.message ? <p>{user.message}</p> : <br/>  }
+            
             <button onClick={signIn} >Existing User Sign In</button>
             <br/> 
             <button onClick={signUp} >New User Sign Up</button>
