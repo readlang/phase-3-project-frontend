@@ -13,7 +13,6 @@ function RoomSelect({user, setLocation, roomListData, setRoomListData}) {
         } else {
             setRoomListData([...roomListData, newRoom])
         }
-        
     }
 
     return (
@@ -23,8 +22,6 @@ function RoomSelect({user, setLocation, roomListData, setRoomListData}) {
             { roomListData.map(room => <RoomListItem key={room.id} roomItem={room} setLocation={setLocation}/> ) }
  
             <RoomCreate addRoom={addRoom} />
-
-
         </div>
         
     );

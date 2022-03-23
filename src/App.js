@@ -32,7 +32,7 @@ function App() {
       <h1>Challenge Room</h1>
       { user.message !== "Authorized" ? <LogIn user={user} setUser={setUser} /> : null }
       { user.message === "Authorized" && user.location === 0 ? <RoomSelect user={user} 
-        setLocation={setLocation} roomListData={roomListData} setRoomListData={setRoomListData} /> : null }
+        setLocation={setLocation} roomListData={roomListData} setRoomListData={setRoomListData}/> : null }
       { user.message === "Authorized" && user.location !== 0 ? <MessageRoom user={user} 
         room={ roomListData.find(eachRoom => eachRoom.id === user.location) } /> : null }
       

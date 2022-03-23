@@ -6,11 +6,21 @@ function MessageRoom({user, room}) {
     //  the app will have to check in for new messages on an automatic cycle (every 5 seconds?)
     // should this just do that on a timer setTimeout() or interval
     const [messageList, setMessageList] = useState([])
+    
+    const [changingNumber, setChangingNumber] = useState(1)
+
+    useEffect(() => {
+        const intervalId = setInterval(() =>{ setChangingNumber( Math.random() ) }, 5000)
+        return function() {
+            clearInterval(intervalId)
+        }
+    }, [])
+    
     useEffect(() => {
         fetch(`http://localhost:9292/rooms/${room.id}/messages`)
         .then(r => r.json())
         .then(d => setMessageList(d))
-    }, [])
+    }, [changingNumber])
     console.log("message list", messageList)
  
     const [userList, setUserList] = useState([])
@@ -19,8 +29,22 @@ function MessageRoom({user, room}) {
         fetch(`http://localhost:9292/rooms/${room.id}/users`)
         .then(r => r.json())
         .then(d => setUserList(d))
-    }, [])
+    }, [messageList])
     console.log("user list", userList)
+
+    function handleNewMessage(messageText) {
+        fetch(`http://localhost:9292/rooms/${room.id}/messages`, {
+            method: 'POST',
+            headers: {"content-type": "application/json"},
+            body: JSON.stringify({
+                user_id: user.id,
+                room_id: room.id,
+                message_text: messageText
+            })
+        })
+        .then(r => r.json())
+        .then(newMessage=> setMessageList([...messageList, newMessage ]) )
+    }
 
     return (
         <div>
@@ -31,7 +55,7 @@ function MessageRoom({user, room}) {
 
                     author={ userList.find(eachUser => eachUser.id === eachMessage.user_id ) }
                 /> ) }
-            <MessageCreate />
+            <MessageCreate handleNewMessage={handleNewMessage} />
         </div>
     );
 }
