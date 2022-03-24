@@ -16,11 +16,11 @@ function RoomSelect({user, setLocation, roomListData, setRoomListData}) {
     }
 
     return (
-        <div>
+        <div id="roomselect">
             <h3>Select a Room, {user.username}</h3>
-            Room list here
-            { roomListData.map(room => <RoomListItem key={room.id} roomItem={room} setLocation={setLocation}/> ) }
- 
+            <div className="scrollable">
+                { roomListData.map(room => <RoomListItem key={room.id} roomItem={room} setLocation={setLocation}/> ) }
+            </div>
             <RoomCreate addRoom={addRoom} />
         </div>
         

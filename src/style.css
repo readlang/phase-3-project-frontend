@@ -9,14 +9,17 @@ body {
   background-color: hsl(0, 0%, 95%);
 }
 
-
+button, input {
+  border-radius: 9px;
+  border: 1px solid gray;
+}
 
 
 .App {
   text-align: center;
   width: 400px;
   height: 800px;
-  box-shadow: 3px 3px 3px 2px hsl(0, 0%, 80%);
+  box-shadow: 3px 3px 8px 4px hsl(0, 0%, 80%);
   background-color: white;
 }
 
@@ -27,8 +30,28 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  
 
 }
+
+#roomselect {
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 780px
+}
+
+.scrollable {
+  overflow-y: auto;
+}
+
+#roomlistitem {
+  width: 300px;
+  border-radius: 10px;
+  border: 1px solid black;
+}
+
 
 /* example */
 .App-header {
