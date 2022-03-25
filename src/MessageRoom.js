@@ -3,8 +3,7 @@ import MessageCreate from "./MessageCreate"
 import MessageItem from "./MessageItem"
 
 function MessageRoom({user, room}) {
-    //  the app will have to check in for new messages on an automatic cycle (every 5 seconds?)
-    // should this just do that on a timer setTimeout() or interval
+    const [editMode, setEditMode] = useState(false)
     const [messageList, setMessageList] = useState([])
     
     const [changingNumber, setChangingNumber] = useState(1)
@@ -21,7 +20,7 @@ function MessageRoom({user, room}) {
         .then(r => r.json())
         .then(d => setMessageList(d))
     }, [changingNumber])
-    console.log("message list", messageList)
+    //console.log("message list", messageList)
  
     const [userList, setUserList] = useState([])
 
@@ -30,7 +29,7 @@ function MessageRoom({user, room}) {
         .then(r => r.json())
         .then(d => setUserList(d))
     }, [messageList])
-    console.log("user list", userList)
+    //console.log("user list", userList)
 
     function handleNewMessage(messageText) {
         fetch(`http://localhost:9292/rooms/${room.id}/messages`, {
@@ -46,15 +45,40 @@ function MessageRoom({user, room}) {
         .then(newMessage=> setMessageList([...messageList, newMessage ]) )
     }
 
+    function handleDeleteMessage(message){
+        console.log("delete!", message)
+        fetch(`http://localhost:9292/messages/${message.id}`, {
+            method: 'DELETE',
+            headers: {"content-type": "application/json"}
+        })
+        .then(r => r.json())
+        .then(returnMessage=>console.log(returnMessage))  // -------------------------------------------- need to remove from the messages state
+    }
+
     return (
         <div id="messageroom">
             <h3>Room Name: {room.room_name}</h3>
-            <p>Details</p>
+            <div id="messageroomheader">
+                
+                <div>
+                    
+                    <span style={{marginLeft: "20px"}} >{room.room_detail}</span>
+                </div>
+                <div style={{marginRight: "20px"}} >
+                    <span >message edit </span>
+                    <label class="switch"> 
+                        <input type="checkbox" onChange={e => setEditMode(e.target.checked)} ></input>
+                        <span className="slider round"></span>
+                    </label>
+                </div>
+            </div>
             <div className="scrollable">
                 { messageList.map(eachMessage => 
                     <MessageItem key={eachMessage.id} message={eachMessage} 
-
+                        myMessage={ user.id === eachMessage.user_id ? "yes" : "no" }
+                        editMode={editMode}
                         author={ userList.find(eachUser => eachUser.id === eachMessage.user_id ) }
+                        handleDeleteMessage={handleDeleteMessage}
                     /> ) }
             </div>
             <MessageCreate handleNewMessage={handleNewMessage} />

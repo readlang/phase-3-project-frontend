@@ -45,7 +45,7 @@ function App() {
           }
         </Route>
           
-        <Route path="/room">
+        <Route path="/rooms/">
           { user.message === "Authorized" && user.location !== 0 ? <MessageRoom user={user} 
             room={ roomListData.find(eachRoom => eachRoom.id === user.location) } /> : <div> <br/> Please log in</div>
           }
