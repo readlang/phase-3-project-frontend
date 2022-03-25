@@ -1,12 +1,25 @@
 import React from 'react';
+import {Link, NavLink} from 'react-router-dom'
 
-function NavBar() {
+function NavBar({user, logOut}) {
     
     return(
         <div id='navbar'>
-            <div>Challenge Room</div>
-            <div>Logged in as:</div>
-            <button>Logout</button>
+
+            <Link 
+                to='/'  
+                style = {{color: "white", fontStyle: "italic" }} >
+            Rooms
+            </Link>
+
+            
+
+            { user.message !== "Authorized" ? null : 
+                <div id='login'>
+                    <span>Hi {user.username}&ensp;</span>
+                    <button onClick={logOut} >Logout </button>
+                </div>
+            }
         </div>
     )
 }

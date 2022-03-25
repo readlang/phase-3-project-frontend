@@ -11,7 +11,7 @@ function MessageCreate({handleNewMessage}) {
     }
 
     return (
-        <div>
+        <div id="messagecreate">
             <form onSubmit={handleSubmit} >
                 <input type="text" name="message" value={messageText} onChange={e => setMessageText(e.target.value)} />
                 <input type="submit" value="Send"/>

@@ -47,14 +47,16 @@ function MessageRoom({user, room}) {
     }
 
     return (
-        <div>
+        <div id="messageroom">
             <h3>Room Name: {room.room_name}</h3>
             <p>Details</p>
-            { messageList.map(eachMessage => 
-                <MessageItem key={eachMessage.id} message={eachMessage} 
+            <div className="scrollable">
+                { messageList.map(eachMessage => 
+                    <MessageItem key={eachMessage.id} message={eachMessage} 
 
-                    author={ userList.find(eachUser => eachUser.id === eachMessage.user_id ) }
-                /> ) }
+                        author={ userList.find(eachUser => eachUser.id === eachMessage.user_id ) }
+                    /> ) }
+            </div>
             <MessageCreate handleNewMessage={handleNewMessage} />
         </div>
     );

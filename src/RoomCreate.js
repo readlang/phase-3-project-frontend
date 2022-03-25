@@ -14,11 +14,13 @@ function RoomCreate({addRoom}) {
         })
         .then(r => r.json())
         .then(newRoom => addRoom(newRoom))
+        setRoomName("")
+        setRoomDetail("")
     }
 
     return (
-        <div>
-            <h4>Create Room</h4>
+        <div id="roomcreate">
+            <h4>Create New Room</h4>
             <form onSubmit={handleSubmit} >
                 <input type="text" name="Name" placeholder="Name"
                 value={roomName} onChange={e => setRoomName(e.target.value)} />

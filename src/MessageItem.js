@@ -1,7 +1,7 @@
 
 function MessageItem({message, author={username: "Loading"}}) {
     return(
-        <div>
+        <div id="messageitem">
             <p>{message.message_text} </p>
             <p>-{author.username } </p>
         </div>

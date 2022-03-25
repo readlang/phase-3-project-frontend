@@ -1,37 +1,74 @@
+
 body {
-  margin: 20px;
+  margin: 0px;
   font-family: 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   display: flex;
   justify-content: center;
+  align-items: center;
+  height: 100vh;
   background-color: hsl(0, 0%, 95%);
 }
 
 button, input {
-  border-radius: 9px;
+  border-radius: 8px;
   border: 1px solid gray;
 }
 
+a:link {
+  text-decoration: none;
+}
+
+input {
+  height: 18px;
+}
 
 .App {
   text-align: center;
   width: 400px;
   height: 800px;
-  box-shadow: 3px 3px 8px 4px hsl(0, 0%, 80%);
+  box-shadow: 0px 3px 8px 6px hsl(0, 0%, 80%);
   background-color: white;
 }
 
-
-
 #navbar {
-  background-color: hsl(0, 0%, 90%);
+  background-color: hsl(210, 11%, 15%);
+  height: 40px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  
+  align-items: center;
+  padding: 0px 10px;
+  color: white;
+  font-weight: 600;
 
+}
+
+#navbar #login {
+  font-size: small;
+  font-weight: 400;
+}
+
+#navbar button {
+  font-size: 12px;
+}
+
+#login-button {
+  background-color: #166fe5;
+  width: 70px;
+  height: 30px;
+  color: white;
+  border-color: white;
+}
+
+#signup-button {
+  background-color: #797979;
+  width: 70px;
+  height: 30px;
+  color: white;
+  border-color: white;
 }
 
 #roomselect {
@@ -39,30 +76,94 @@ button, input {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  height: 780px
+  height: 760px
+}
+
+#messageroom {
+  display: flex;
+  flex-direction: column;
+  height: 750px
 }
 
 .scrollable {
-  overflow-y: auto;
+  overflow-y: scroll;
+
 }
+
+
 
 #roomlistitem {
-  width: 300px;
+  
+  /* width: 300px;
   border-radius: 10px;
   border: 1px solid black;
+  background-color: lightgray; */
+
 }
 
+hr {
+  width: 95%;
+  border: 1px solid hsl(0, 0%, 79%);
+}
 
-/* example */
-.App-header {
+#roomcreate {
+  background-color: hsl(240, 4%, 85%);
+  height: 190px;
+}
 
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+#roomcreate input[type="submit"] {
+  background-color: #166fe5;
+  width: 90px;
+  height: 30px;
   color: white;
+  border: 0px;
+  margin: 10px;
 }
 
+h4 {
+  margin: 10px;
+}
 
+p {
+  margin: 7px;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(213, 4%, 49%) hsl(240, 4%, 95%);
+}
+
+/* Chrome */
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: hsl(240, 4%, 95%);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: hsl(213, 4%, 49%);
+  border-radius: 20px;
+  border: 3px solid hsl(240, 4%, 95%);
+}
+
+#messagecreate form{
+  border: 2px solid black;
+  border-radius: 8px;
+  margin: 5px;
+}
+
+#messagecreate input[type="text"] {
+  width: 332px;
+  border: 0px;
+
+}
+
+#messagecreate input[type="submit"] {
+  background-color: #166fe5;
+  color: white;
+  height: 24px;
+  width: 50px;
+}

@@ -28,23 +28,26 @@ function App() {
     setUser({...user, location: locationID})
   }
 
+  function logOut() {
+    console.log("logOut")
+    setUser(userInitialState)
+  }
+
   return (
-
     <div className="App">
-      <header><NavBar /> </header>
+      <header><NavBar user={user} logOut={logOut} /></header>
       
-
       <Switch>
         <Route exact path="/">  
           { user.message !== "Authorized" ? 
-            <LogIn user={user} setUser={setUser} /> : 
-            <RoomSelect user={user} setLocation={setLocation} roomListData={roomListData} setRoomListData={setRoomListData}/> 
+            <LogIn user={user} setUser={setUser} /> :    // show LogIn if not Authorized
+            <RoomSelect user={user} setLocation={setLocation} roomListData={roomListData} setRoomListData={setRoomListData}/>   // show Rooms if Authorized 
           }
         </Route>
-
+          
         <Route path="/room">
           { user.message === "Authorized" && user.location !== 0 ? <MessageRoom user={user} 
-            room={ roomListData.find(eachRoom => eachRoom.id === user.location) } /> : null 
+            room={ roomListData.find(eachRoom => eachRoom.id === user.location) } /> : <div> <br/> Please log in</div>
           }
         </Route>
         
@@ -54,3 +57,8 @@ function App() {
 }
 
 export default App;
+
+/*
+
+
+*/

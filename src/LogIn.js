@@ -22,7 +22,7 @@ function LogIn({ user, setUser }) {
     }
 
     return (
-        <div>
+        <div id="login">
             <h3>Log In</h3>
             <form>
                 <input type="text" name="username" placeholder="Username" 
@@ -36,9 +36,9 @@ function LogIn({ user, setUser }) {
             
             {user.message ? <p>{user.message}</p> : <br/>  }
             
-            <button onClick={signIn} >Existing User Sign In</button>
+            <button id="login-button" onClick={signIn} > Log In </button>
             <br/> 
-            <button onClick={signUp} >New User Sign Up</button>
+            <button id="signup-button" onClick={signUp} > Sign Up </button>
         </div>
     );
 }
