@@ -8,8 +8,9 @@ function MessageRoom({user, room}) {
     
     const [changingNumber, setChangingNumber] = useState(1)
 
+    // seems like the truly correct professional way to do this is with websockets, which is beyond the scope of this learning project
     useEffect(() => {
-        const intervalId = setInterval(() =>{ setChangingNumber( Math.random() ) }, 5000)
+        const intervalId = setInterval(() =>{ setChangingNumber( Math.random() ) }, 5000) // reload every 5 seconds
         return function() {
             clearInterval(intervalId)
         }
@@ -46,27 +47,25 @@ function MessageRoom({user, room}) {
     }
 
     function handleDeleteMessage(message){
-        console.log("delete!", message)
+        console.log("delete!", messageList, message)
         fetch(`http://localhost:9292/messages/${message.id}`, {
             method: 'DELETE',
             headers: {"content-type": "application/json"}
         })
         .then(r => r.json())
-        .then(returnMessage=>console.log(returnMessage))  // -------------------------------------------- need to remove from the messages state
+        .then(returnMessage => setMessageList( messageList.filter( each => each.id !== returnMessage.id ) ) ) 
     }
 
     return (
         <div id="messageroom">
             <h3>Room Name: {room.room_name}</h3>
             <div id="messageroomheader">
-                
                 <div>
-                    
-                    <span style={{marginLeft: "20px"}} >{room.room_detail}</span>
+                    <span id="roomdetail" >{room.room_detail}</span>  
                 </div>
-                <div style={{marginRight: "20px"}} >
-                    <span >message edit </span>
-                    <label class="switch"> 
+                <div id="deletemodeswitch"  >   
+                    <span >delete mode </span>
+                    <label className="switch"> 
                         <input type="checkbox" onChange={e => setEditMode(e.target.checked)} ></input>
                         <span className="slider round"></span>
                     </label>

@@ -6,13 +6,9 @@ function NavBar({user, logOut}) {
     return(
         <div id='navbar'>
 
-            <Link 
-                to='/'  
-                style = {{color: "white", fontStyle: "italic" }} >
+            <Link id='link'  to='/' >
             Rooms
             </Link>
-
-            
 
             { user.message !== "Authorized" ? null : 
                 <div id='login'>

@@ -5,7 +5,7 @@ function RoomListItem({ roomItem, setLocation }) {
 
     return (
         <div id="roomlistitem" onClick={() => setLocation(roomItem.id)} >
-            <Link to={`/rooms/${roomItem.id}`} style={{color: "black"}} >
+            <Link className="link" to={`/rooms/${roomItem.id}`}  >  
                 <h4>{roomItem.room_name}</h4>
                 <p>{roomItem.room_detail}</p>
                 <hr/>

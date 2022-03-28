@@ -46,6 +46,11 @@ input {
 
 }
 
+#navbar #link {
+  color: white;
+  font-style: italic;
+}
+
 #navbar #login {
   font-size: small;
   font-weight: 400;
@@ -79,6 +84,11 @@ input {
   height: 760px
 }
 
+/* roomlistitem */
+#roomlistitem .link {
+  color: black;
+}
+
 #messageroom {
   display: flex;
   flex-direction: column;
@@ -92,6 +102,17 @@ input {
 
 }
 
+#messageitemcontainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  
+  
+}
+
+
+
+
 #messageitem {
   width: 300px;
   border-radius: 5px;
@@ -99,6 +120,8 @@ input {
   min-height: 30px;
   margin-top: 10px;
   margin-right: 5px;
+
+
 }
 
 .mymessage {
@@ -198,6 +221,13 @@ p {
   align-items: center;
 }
 
+#messageroomheader #roomdetail {
+  margin-left: 20px;
+}
+
+#messageroomheader #deletemodeswitch {
+  margin-right: 20px;
+}
 
 /* The switch - the box around the slider */
 .switch {
@@ -215,6 +245,7 @@ p {
 }
 
 /* The slider */
+
 .slider {
   position: absolute;
   cursor: pointer;
