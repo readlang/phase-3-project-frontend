@@ -5,23 +5,22 @@ import MessageItem from "./MessageItem"
 function MessageRoom({user, room}) {
     const [editMode, setEditMode] = useState(false)
     const [messageList, setMessageList] = useState([])
-    
-    const [changingNumber, setChangingNumber] = useState(1)
 
-    // seems like the truly correct professional way to do this is with websockets, which is beyond the scope of this learning project
+    function getMessages() {
+        // console.log("fetching...")
+        fetch(`http://localhost:9292/rooms/${room.id}/messages`)
+        .then(r => r.json())
+        .then(d => setMessageList(d))
+    }
+
+    // websockets seems like the way to do this realtime, which is beyond the scope of this learning project
     useEffect(() => {
-        const intervalId = setInterval(() =>{ setChangingNumber( Math.random() ) }, 5000) // reload every 5 seconds
+        getMessages();      // loads the first time
+        const intervalId = setInterval(getMessages, 5000)   // then reloads every 5 seconds
         return function() {
             clearInterval(intervalId)
         }
     }, [])
-    
-    useEffect(() => {
-        fetch(`http://localhost:9292/rooms/${room.id}/messages`)
-        .then(r => r.json())
-        .then(d => setMessageList(d))
-    }, [changingNumber])
-    //console.log("message list", messageList)
  
     const [userList, setUserList] = useState([])
 
@@ -29,7 +28,7 @@ function MessageRoom({user, room}) {
         fetch(`http://localhost:9292/rooms/${room.id}/users`)
         .then(r => r.json())
         .then(d => setUserList(d))
-    }, [messageList])
+    }, [messageList, room.id])
     //console.log("user list", userList)
 
     function handleNewMessage(messageText) {

@@ -6,7 +6,7 @@ function RoomCreate({addRoom}) {
 
     function handleSubmit (event) {
         event.preventDefault();
-        console.log(`${roomName} ${roomDetail}`)
+        // console.log(`${roomName} ${roomDetail}`)
         fetch("http://localhost:9292/rooms", {
             method: "POST",
             headers: {"content-type": "application/json"},

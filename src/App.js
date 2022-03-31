@@ -19,9 +19,9 @@ function App() {
   const [roomListData, setRoomListData] = useState([])
 
   useEffect(() =>{
-      fetch("http://localhost:9292/rooms")
-      .then(r => r.json())
-      .then(d => setRoomListData(d))
+    fetch("http://localhost:9292/rooms")
+    .then(r => r.json())
+    .then(d => setRoomListData(d))
   }, [])
 
   function setLocation(locationID) {
@@ -29,19 +29,17 @@ function App() {
   }
 
   function logOut() {
-    console.log("logOut")
     setUser(userInitialState)
   }
 
   return (
     <div className="App">
       <header><NavBar user={user} logOut={logOut} /></header>
-      
       <Switch>
         <Route exact path="/">  
           { user.message !== "Authorized" ? 
             <LogIn user={user} setUser={setUser} /> :    // show LogIn if not Authorized
-            <RoomSelect user={user} setLocation={setLocation} roomListData={roomListData} setRoomListData={setRoomListData}/>   // show Rooms if Authorized 
+            <RoomSelect setLocation={setLocation} roomListData={roomListData} setRoomListData={setRoomListData}/>   // show Rooms if Authorized 
           }
         </Route>
           
